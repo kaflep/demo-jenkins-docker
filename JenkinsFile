@@ -22,7 +22,7 @@ pipeline {
     stage('Build Docker image'){
         steps{
             script{
-                sh 'docker build -t -f pkafle/app .'
+                sh 'docker build -t my-image -f pkafle/app .'
 
             }
         }
