@@ -31,7 +31,7 @@ pipeline {
     stage("Push docker image to Dockerhub"){
         steps{
             script{
-                withCredentials([string(credentialsId: 'pkafle', variable: 'pkafle')]) {
+                withCredentials([string(credentialsId: 'pkafle2', variable: 'pkafle')]) {
                     sh 'docker login -u pkafle -p ${pkafle}'
                     sh 'docker push pkafle/app'
                 }
