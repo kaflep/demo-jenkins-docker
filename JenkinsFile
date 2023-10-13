@@ -22,18 +22,23 @@ pipeline {
     stage('Build Docker image'){
         steps{
             script{
-                sh 'docker build -t pkafle\app .'
+                sh 'docker build -t pkafle/app:${BUIDL_NUMBER} .'
 
             }
         }
     }
+    stage('Docker deploy') {
+      steps {
+          sh 'docker run -itd -p 8083:8080 pkafle/app:${BUILD_NUMBER}'
+      }
+  }
 
     stage("Push docker image to Dockerhub"){
         steps{
             script{
                 withCredentials([string(credentialsId: 'pkafle', variable: 'pkafle')]) {
                     sh 'docker login -u pkafle -p ${pkafle}'
-                    sh 'docker push pkafle/app'
+                    sh 'docker push pkafle/app:${BUILD_NUMBER}'
                 }
 
             }
