@@ -6,24 +6,19 @@ pipeline {
     //}
 
   stages {
-    stage('Checkout') {
-      steps {
-        sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
-      }
-    }
-    stage('Build'){
+    stage('Compile and clean') {
       steps{
-        sh 'mvn clean install'
+        sh "mvn clean compile"
       }
+      stage('deploy'){
+        steps {
+          sh "mvn package"
+        }
     }
 
     stage('Build Docker image'){
         steps{
-            script{
-                sh 'docker build -t pkafle/app:${BUIDL_NUMBER} .'
-
-            }
+                sh 'docker build -t pkafle/app:${BUIDL_NUMBER} .' 
         }
     }
     stage('Docker deploy') {
