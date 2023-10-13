@@ -36,8 +36,8 @@ pipeline {
     stage("Push docker image to Dockerhub"){
         steps{
             script{
-                withCredentials([string(credentialsId: 'pkafle', variable: 'pkafle')]) {
-                    sh 'docker login -u pkafle -p ${pkafle}'
+                withCredentials([string(credentialsId: 'DockerId', variable: 'dockerpwd')]) {
+                    sh 'docker login -u pkafle -p ${dockerpwd}'
                     sh 'docker push pkafle/app:${BUILD_NUMBER}'
                 }
 
