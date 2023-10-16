@@ -15,14 +15,14 @@ pipeline {
     }
     stage('Build'){
       steps{
-        sh 'cd hello_world && mvn clean package'
+        sh 'mvn clean package'
       }
     }
     
     stage('Build Docker image'){
         steps{
             script{
-                sh 'cd hello_world && docker build -t pkafle/app .'
+                sh 'docker build -t pkafle/app .'
 
             }
         }
