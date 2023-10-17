@@ -22,7 +22,7 @@ pipeline {
     stage('Build Docker image'){
         steps{
             script{
-                sh 'docker build -t pkafle/myapp:1 .'
+                sh 'docker build -t kaflep/myapp:2 .'
 
             }
         }
@@ -31,9 +31,9 @@ pipeline {
     stage("Push docker image to Dockerhub"){
         steps{
             script{
-                withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                    sh 'docker login -u pkafle -p ${Dockerpwd}'
-                    sh 'docker push pkafle/myapp:1'
+                withCredentials([string(credentialsId: 'kaflep', variable: 'Dockerpwd')]) {
+                    sh 'docker login -u kaflep -p ${Dockerpwd}'
+                    sh 'docker push kaflep/myapp:2'
                 }
 
             }
